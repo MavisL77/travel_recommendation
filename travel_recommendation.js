@@ -57,6 +57,32 @@ fetch('travel_recommendation_api.json')
         }
       });
 
+      if (input === 'beach' || input === 'beaches') {
+        data.beaches.forEach(beach => {
+          resultDiv.innerHTML += `
+            <div class="item">
+              <h2>${beach.name}</h2>
+              <img src="${beach.imageUrl}" alt="${beach.name}" style="max-width: 300px;"/>
+              <p>${beach.description}</p>
+            </div><hr/>
+          `;
+        });
+        resultsFound = data.beaches.length > 0;
+      }
+   
+      else if (input === 'temple' || input === 'temples') {
+        data.temples.forEach(temple => {
+          resultDiv.innerHTML += `
+            <div class="item">
+              <h2>${temple.name}</h2>
+              <img src="${temple.imageUrl}" alt="${temple.name}" style="max-width: 300px;"/>
+              <p>${temple.description}</p>
+            </div><hr/>
+          `;
+        });
+        resultsFound = data.temples.length > 0;
+      }
+
       if (!resultsFound) {
         resultDiv.innerHTML = '<p>Sorry, there is no matching recommendations.</p>';
       }
