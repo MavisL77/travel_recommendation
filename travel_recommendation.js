@@ -82,20 +82,21 @@ fetch('travel_recommendation_api.json')
         });
         resultsFound = data.temples.length > 0;
       }
-
       else if (input === 'country' || input === 'countries') {
-        data.countries.forEach(country => {
-          resultDiv.innerHTML += `
-            <div class="item">
-              <h2>${country.name}</h2>
-              <img src="${country.imageUrl}" alt="${country.name}" style="max-width: 300px;"/>
-              <p>${country.description}</p>
-            </div><hr/>
-          `;
-        });
-        resultsFound = data.temples.length > 0;
-      }
 
+        data.countries.forEach(country => {
+          country.cities.forEach(city => {
+            resultDiv.innerHTML += `
+              <div class="item">
+                <h2>${city.name}</h2>
+                <img src="${city.imageUrl}" alt="${city.name}" style="max-width: 300px;"/>
+                <p>${city.description}</p>
+              </div><hr/>
+            `;
+          });
+        });
+        resultsFound = true;
+      }
       if (!resultsFound) {
         resultDiv.innerHTML = '<p>Sorry, there is no matching recommendations.</p>';
       }
